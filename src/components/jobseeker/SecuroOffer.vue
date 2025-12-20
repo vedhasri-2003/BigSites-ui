@@ -6,7 +6,7 @@
 
           <b-message type="is-info" has-icon style="font-size: 12px; max-width: 650px;">
             <h5>Welcome to Securo JOBZ!!..</h5>
-            <h4>Profile Email : {{ profileEmail }}</h4>
+            <h4>Profile Email-ID : <span class="highlight">{{ profileEmail }}</span></h4>
             <h5>Job Seekers could view Opportunities by selecting Opportunity Code!</h5>
           </b-message>
 
@@ -115,6 +115,8 @@ export default {
       cbConfirm: "No",
 
       profileEmail: JSON.parse(sessionStorage.getItem("loggedUser") || "{}").userEmail || "",
+      profileId: JSON.parse(sessionStorage.getItem("loggedUser") || "{}").profileId || "",
+
       profileeee_data: null,
       profileId: "",
       userId: "",
@@ -136,6 +138,7 @@ export default {
         const res = await axios.get(url);
         this.profileeee_data = res.data;
         this.profileId = res.data.profileId;
+        this.fetchOpp(this.profileId);
       } catch (err) {
         console.error("Error fetching profile:", err);
       }
@@ -152,7 +155,7 @@ export default {
         // Load Jobseeker Profile
         this.fetchProfileBasedOnUserIdd(this.userId);
 
-        this.fetchOpp();
+       // this.fetchOpp();
       } else {
         setTimeout(() => this.setLoggedUserData(), 300);
       }
@@ -172,8 +175,9 @@ export default {
       }
     },
 
-    async fetchOpp() {
-      const url = this.$hostName + "/api/v1/oppurtunity";
+    async fetchOpp(profileId) {
+      console.log("profileid",profileId);
+      const url = this.$hostName + `/api/v1/oppurtunity/unselected/${profileId}`;
 
       try {
         const res = await axios.get(url);
@@ -220,7 +224,7 @@ export default {
       this.modData = {
         oppurtunityId: this.oppurtunityId,
         profileId: this.profileId,
-        interested: this.cbConfirm
+        status: this.cbConfirm
       };
 
       try {
@@ -322,5 +326,14 @@ export default {
   color: blueviolet;
   cursor: pointer;
 }
+.highlight {
+  color: #6a1b9a;      /* violet */
+  font-weight: 600;
+  cursor: pointer;
+}
 
+.highlight:hover {
+  color: #8e24aa;     /* hover color */
+  text-decoration: underline;
+}
 </style>

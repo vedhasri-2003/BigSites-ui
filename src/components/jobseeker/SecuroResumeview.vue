@@ -9,7 +9,8 @@
                 <h5>Welcome to Securo JOBZ!!..</h5>
                 <h4>
                   Profile Email-ID :
-                  <a @click="viewJd(profile_data)">{{ profileEmail }}</a>
+                  <!-- <a @click="viewJd(profile_data)"><span class="highlight">{{ profileEmail }}</span></a> -->
+                   <a @click="viewJd(profile_data)"> <span class="highlight">{{ profileEmail }}</span></a>
                 </h4>
                 <h5>Click the above "Email-ID" to update</h5>
               </b-message>
@@ -523,7 +524,16 @@ label.item {
   display: flex;
   align-items: center;
 }
+.highlight {
+  color: #6a1b9a;      /* violet */
+  font-weight: 600;
+  cursor: pointer;
+}
 
+.highlight:hover {
+  color: #8e24aa;     /* hover color */
+  text-decoration: underline;
+}
 /* ✅ Responsive fine-tuning */
 @media (max-width: 992px) {
   .col-md-12.mb-0 {
@@ -543,6 +553,7 @@ label.item {
   .col-md-7.col-sm-7 {
     width: 100%;
   }
+  
 }
 
 

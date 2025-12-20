@@ -7,7 +7,7 @@
                 <h5>Welcome to Securo JOBZ!!..</h5>
                 <h4>
                   Employeer Email-ID :
-                  <a @click="viewJd()">{{ employerEmail }}</a>
+                  <a @click="viewJd()">  <span class="highlight">{{ employerEmail }}</span></a>
                 </h4>
                 <h5>Click the above "Email-ID" to update</h5>
               </b-message>
@@ -167,6 +167,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      oppurtunityId:"",
       employerEmail:"",
       oppurtunityEmployerId: "",
       designation: "",
@@ -354,6 +355,7 @@ toUI(dateStr) {
 
       
       this.modData = {
+        oppurtunityId:this.oppurtunityId,
         oppurtunityCode: this.code,
         oppurtunityEmployerId:this.empId,
        // oppurtunityEmployerId: this.oppurtunityEmployerId || 1,
@@ -418,5 +420,13 @@ toUI(dateStr) {
 .col-scroll {
   max-height: 360px;
   overflow-y: scroll;
+}
+.highlight {
+  color: #6a1b9a;   /* violet / blue */
+  font-weight: 600;
+}
+.highlight:hover {
+  color: #8e24aa;     /* hover color */
+  text-decoration: underline;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <section id="jdpost">
+  <section id="jdrecview">
     <div class="col-md-12 col-sm-12">
       <form id="appointment-form" role="form" method="post" action="#">
         <div class="col-md-6 col-sm-6">
@@ -8,7 +8,7 @@
             :agentEmail = "agentEmail"
           />
 
-          <h4>Commission Due</h4>
+          <h6>Commission Due</h6>
           <div class="col-md-12 col-sm-12 profile-table-head">
             <div class="col-md-5 col-sm-5 page-font"><b>Profile Email</b></div>
             <div class="col-md-5 col-sm-5 page-font"><b>Name</b></div>

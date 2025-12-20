@@ -13,6 +13,7 @@
           <li><router-link to="/agent/myaccount" exact-active-class="active">My Account</router-link></li>
           <li><router-link to="/agent/commissiondue" exact-active-class="active">Commission Due</router-link></li>
           <li><router-link to="/agent/profview" exact-active-class="active">View Profiles</router-link></li>
+          <li><i class="fa fa-sign-out logoutsize"></i> <router-link to="/" >Logout</router-link></li>
         </ul>
       </div>
     </nav>
@@ -20,6 +21,16 @@
 </template>
 
 <style scoped>
+ .logoutsize {
+    font-size: 15px;
+    color: red;
+    margin-left: 20px;
+    padding-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    flex-wrap: wrap;
+  }
+
   .list-inline {
     list-style: none;
     padding: 0;

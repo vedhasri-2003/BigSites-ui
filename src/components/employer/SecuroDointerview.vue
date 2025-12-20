@@ -308,8 +308,8 @@ export default {
       }
       this.modData = {
         empEmail: this.employerEmail,
-        interviewId: 1,
-       employerId:5,
+        interviewId: this.interviewId,
+       employerId:this.employerId,
        profileId:this.profId,
        status:this.interviewStatus,
        remark:this.remarks

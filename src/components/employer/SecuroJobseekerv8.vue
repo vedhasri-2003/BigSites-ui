@@ -11,17 +11,22 @@ modified
                 <h5>Welcome to Securo JOBZ!!..</h5>
                 <h4>
                   Employeer Email-ID :
-                  <a @click="viewJd()">{{ employerEmail }}</a>
+                  <a @click="viewJd()"><span class="highlight">{{ employerEmail }}</span></a>
                 </h4>
                 <h5>Click the above "Email-ID" to update</h5>
               </b-message>
                     <h4>Schedule interview list</h4>
 
                    <div class="interview-box">
+                    <!-- ✅ No data available -->
+  
            <div class="opp-header">
   <div class="col-code-header"><b>Opportunity Code</b></div>
   <div class="col-desig-header"><b>Designation</b></div>
 </div>
+<div v-if="!postdata || postdata.length === 0" class="no-data">
+    <p class="no-data-text">No schedules available</p>
+  </div>
 
                         <div v-for="(collapse, index) in postdata" :key="index">
                            <div class="jd-header" @click="toggleCollapse(index)">
@@ -202,6 +207,9 @@ export default {
             visible: false,
             disabledFlag: true,
             interviewDate:"",
+            interviewOppurtunitySelectId:"",
+            oppurtunitySelectedId:"",
+
 selected:"",
 interviewTime:"",
 interviewInstruction:"",
@@ -268,7 +276,8 @@ employerEmail:"",
 
         async fetchProfilers(){
           try{
-            const res=await axios.get(`${this.$hostName}/api/v1/interview/opportunities/profiles`)
+            const res=await axios.get(`${this.$hostName}/api/v1/oppurtunity-selection/un_selected_interview`)
+            console.log("unslect",res);
             this.postdata = res.data; 
         this.collapseStates = this.postdata.map(() => false);
 
@@ -286,7 +295,7 @@ employerEmail:"",
   );
 },
 
-        viewProfile(p) {
+        viewProfile(p,collapse) {
           console.log("ppppp",p);
             this.visible = true;
             this.jdcode = p.oppurtunityCode;
@@ -301,6 +310,9 @@ employerEmail:"",
             this.profDistrict = p.district;
             this.profstate = p.state;
             this.profPincode = p.pincode;
+            this.oppurtunitySelectedId = collapse.oppurtunitySelectedId;
+            console.log("Interview Oppurtunity Selected ID:",
+              this.oppurtunitySelectedId);
         },
 
         toggleCollapse(index) {
@@ -317,7 +329,7 @@ employerEmail:"",
         return;
       }
       this.modData = {
-        interviewOppurtunitySelectId: 6,
+        interviewOppurtunitySelectId: this.oppurtunitySelectedId,
        interviewDate:this.selected,
        interviewTime:this.interviewTime,
        interviewVenue:this.interviewVenue,
@@ -338,6 +350,9 @@ employerEmail:"",
             type: "is-success",
             duration: 3000,
           });
+          setTimeout(() => {
+  window.location.reload();
+}, 800);
           return;
 
       } catch (err) {
@@ -458,6 +473,27 @@ employerEmail:"",
   padding: 10px;
   display: inline-block;  
   border-radius: 4px;
+}
+.highlight {
+  color: #6a1b9a;   /* violet / blue */
+  font-weight: 600;
+}
+.highlight:hover {
+  color: #8e24aa;     /* hover color */
+  text-decoration: underline;
+}
+.no-data {
+  padding: 14px;
+  text-align: center;
+  background-color: #f2f2f2;
+  border-radius: 4px;
+  margin: 8px 0;
+}
+
+.no-data-text {
+  color: #555;     /* darker */
+  font-weight: 500;
+  font-style: italic;
 }
 
 </style>
